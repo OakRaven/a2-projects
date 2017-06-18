@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GithubService } from '../github.service';
+import { RepoComponent } from '../repo/repo.component';
 
 @Component({
   selector: 'app-profile',
@@ -8,11 +9,21 @@ import { GithubService } from '../github.service';
 })
 export class ProfileComponent implements OnInit {
 
-  private user: Array<any>;
+  username: string;
+  private user: any;
   private repos: Array<any>;
 
 
   constructor(private githubService: GithubService) {
+    this.user = false;
+   }
+
+  ngOnInit() {
+  }
+
+  searchUser() {
+    this.githubService.updateUser(this.username);
+
     this.githubService.getUser().subscribe(user => {
        this.user = user;
       });
@@ -20,9 +31,6 @@ export class ProfileComponent implements OnInit {
       this.githubService.getRepos().subscribe(repos => {
         this.repos = repos;
       });
-   }
-
-  ngOnInit() {
   }
 
 }

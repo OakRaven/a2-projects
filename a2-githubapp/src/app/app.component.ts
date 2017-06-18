@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpModule } from '@angular/http';
+
 import { GithubService } from './github.service';
 
 @Component({
